@@ -1,0 +1,70 @@
+<!DOCTYPE html SYSTEM "http://www.thymeleaf.org/dtd/xhtml1-strict-thymeleaf-spring4-4.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml" xmlns:th="http://www.thymeleaf.org">
+<html lang="en">
+<head th:replace="_temp :: header ('Practitioner List')">
+<body>
+<!-- https://stackoverflow.com/questions/19733447/bootstrap-navbar-with-left-center-or-right-aligned-items -->
+<nav class="navbar navbar-expand-md navbar-dark fixed-top bg-dark">
+    <div class="navbar-collapse collapse w-100 order-1 order-md-0 dual-collapse2">
+        <ul class="navbar-nav mr-auto">
+            <li class="nav-item active">
+                <a class="nav-link" href="/">Info on STDs</a>
+            </li>
+            <li class="nav-item active">
+                <a class="nav-link" href="/suggestion/ask">Test for STDs</a>
+            </li>
+            <li class="nav-item active">
+                <a class="nav-link" href="/booking/search_item">Book Appointment</a>
+            </li>
+        </ul>
+    </div>
+    <div class="mx-auto order-0">
+        <a class="navbar-brand mx-auto" href="/">STD Information App</a>
+        <button class="navbar-toggler" type="button" data-toggle="collapse" data-target=".dual-collapse2">
+            <span class="navbar-toggler-icon"></span>
+        </button>
+    </div>
+    <div class="navbar-collapse collapse w-100 order-3 dual-collapse2">
+        <ul class="navbar-nav ml-auto">
+            <li class="nav-item active">
+                <a class="nav-link" href="/syndication/cdc">CDC Information</a>
+            </li>
+        </ul>
+    </div>
+</nav>
+<div class="jumbotron">
+    <div class="container">
+        <h1 class="display-3">List of doctors, medical facilities nearby.</h1>
+    </div>
+</div>
+<main role="main">
+<table class="table table-bordered table-striped">
+    <tr>
+        <th>Name</th>
+        <th>Speciality</th>
+        <th>Phone No.</th>
+        <th>Email</th>
+        <th>Address</th>
+        <th>Postal Code</th>
+        <th>Click to Book</th>
+    </tr>
+    <tr th:each="practitioner : ${practitioners}">
+        <td th:text="${practitioner.name}">name</td>
+        <td th:text="${practitioner.speciality}">specialty</td>
+        <td th:text="${practitioner.phone}">phone</td>
+        <td th:text="${practitioner.email}">email</td>
+        <td th:text="${practitioner.address}">address</td>
+        <td th:text="${practitioner.postalCode}">postal code</td>
+        <td>
+            <a th:href="@{/booking/appointment(practitionerName=${practitioner.name}, recipientEmail=${practitioner.email})}" class="btn btn-default">
+                <i>Book Appointment</i>
+            </a>
+        </td>
+     </tr>
+</table>
+
+<div th:replace="_temp :: footer"></div>
+<div th:replace="_temp :: script"></div>
+</main>
+</body>
+</html>

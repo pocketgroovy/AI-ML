@@ -1,0 +1,109 @@
+<!DOCTYPE HTML>
+<html xmlns="http://www.w3.org/1999/xhtml" xmlns:th="http://www.thymeleaf.org">
+<head th:replace="_temp :: header ('BookingForm confirm')">
+</head>
+<body>
+<!-- https://stackoverflow.com/questions/19733447/bootstrap-navbar-with-left-center-or-right-aligned-items -->
+<nav class="navbar navbar-expand-md navbar-dark fixed-top bg-dark">
+    <div class="navbar-collapse collapse w-100 order-1 order-md-0 dual-collapse2">
+        <ul class="navbar-nav mr-auto">
+            <li class="nav-item active">
+                <a class="nav-link" href="/">Info on STDs</a>
+            </li>
+            <li class="nav-item active">
+                <a class="nav-link" href="/suggestion/ask">Test for STDs</a>
+            </li>
+            <li class="nav-item active">
+                <a class="nav-link" href="/booking/search_item">Book Appointment</a>
+            </li>
+        </ul>
+    </div>
+    <div class="mx-auto order-0">
+        <a class="navbar-brand mx-auto" href="/">STD Information App</a>
+        <button class="navbar-toggler" type="button" data-toggle="collapse" data-target=".dual-collapse2">
+            <span class="navbar-toggler-icon"></span>
+        </button>
+    </div>
+    <div class="navbar-collapse collapse w-100 order-3 dual-collapse2">
+        <ul class="navbar-nav ml-auto">
+            <li class="nav-item active">
+                <a class="nav-link" href="/syndication/cdc">CDC Information</a>
+            </li>
+        </ul>
+    </div>
+</nav>
+<main role="main">
+    <div class="jumbotron">
+        <div class="container">
+            <h1 class="display-4">Booking Form</h1>
+            <h3 class="display-5">Are you ready to send?</h3>
+        </div>
+    </div>
+
+    <div class="container">
+
+        <div class="row">
+
+            <div class="col-md-7">
+
+                <table class="table table-striped table-bordered" th:object="${bookingForm}">
+                    <tr>
+                        <th style="width: 20%">Your Name</th>
+                        <td th:text="*{firstName + ' ' + lastName}"></td>
+                    </tr>
+                    <tr>
+                        <th>Your Email</th>
+                        <td th:text="*{senderEmail}"></td>
+                    </tr>
+                    <tr>
+                        <th>Practitioner Name</th>
+                        <td th:text="*{practitionerName}"></td>
+                    </tr>
+                    <tr>
+                        <th>Practitioner Email</th>
+                        <td th:text="*{recipientEmail}"></td>
+                    </tr>
+                    <tr>
+                        <th>Preferred Appointment Date</th>
+                        <td th:text="*{appointmentDate}"></td>
+                    </tr>
+                    <tr>
+                        <th>Message</th>
+                        <td th:utext="*{fareaNl2br}"></td>
+                    </tr>
+
+                </table>
+
+            </div>
+        </div>
+        <form style="display:hidden" action="/load/mail" th:action="@{/load/mail}"
+              th:object="${bookingForm}" method="post" id="bookingForm" name="bookingForm">
+            <input type="hidden" class="form-control" id="firstName" name="firstName"
+                   th:field="*{firstName}" th:width="20"/>
+            <input type="hidden" class="form-control" id="lastName" name="lastName"
+                   th:field="*{lastName}" th:width="20"/>
+            <input type="hidden" class="form-control" id="appointmentDate" name="appointmentDate"
+                   th:field="*{appointmentDate}" th:width="20"/>
+            <input type="hidden" class="form-control" id="senderEmail" name="senderEmail"
+                   th:field="*{senderEmail}" th:width="20"/>
+            <input type="hidden" class="form-control" id="recipientEmail" name="recipientEmail"
+                   th:field="*{recipientEmail}" th:width="20"/>
+            <input type="hidden" class="form-control" id="practitionerName" name="practitionerName"
+                   th:field="*{practitionerName}" th:width="20"/>
+            <input type="hidden" class="form-control" id="commentArea" name="commentArea"
+                   th:field="*{commentArea}" th:width="20"/>
+            <div class="mx-auto text-center" >
+                <button type="submit" class="btn btn-primary ">SEND</button>
+            </div>
+        </form>
+        <div>
+            <label class="btn btn-secondary" for="edit">Not Ready </label>
+            <input  onclick='javascript:window.history.back()' value='Back' type='button' hidden id="edit"/>
+        </div>
+        <div th:replace="_temp :: footer"></div>
+    </div>
+
+    <div th:include="_temp :: script"></div>
+</main>
+</body>
+</html>

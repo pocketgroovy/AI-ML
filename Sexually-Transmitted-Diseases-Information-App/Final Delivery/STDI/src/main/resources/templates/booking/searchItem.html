@@ -1,0 +1,85 @@
+<!DOCTYPE HTML>
+<html xmlns="http://www.w3.org/1999/xhtml" xmlns:th="http://www.thymeleaf.org">
+<head th:replace="_temp :: header ('User Info')">
+</head>
+<body>
+<!-- https://stackoverflow.com/questions/19733447/bootstrap-navbar-with-left-center-or-right-aligned-items -->
+<nav class="navbar navbar-expand-md navbar-dark fixed-top bg-dark">
+    <div class="navbar-collapse collapse w-100 order-1 order-md-0 dual-collapse2">
+        <ul class="navbar-nav mr-auto">
+            <li class="nav-item active">
+                <a class="nav-link" href="/">Info on STDs</a>
+            </li>
+            <li class="nav-item active">
+                <a class="nav-link" href="/suggestion/ask">Test for STDs</a>
+            </li>
+            <li class="nav-item active">
+                <a class="nav-link" href="#">Book Appointment</a>
+            </li>
+        </ul>
+    </div>
+    <div class="mx-auto order-0">
+        <a class="navbar-brand mx-auto" href="/">STD Information App</a>
+        <button class="navbar-toggler" type="button" data-toggle="collapse" data-target=".dual-collapse2">
+            <span class="navbar-toggler-icon"></span>
+        </button>
+    </div>
+    <div class="navbar-collapse collapse w-100 order-3 dual-collapse2">
+        <ul class="navbar-nav ml-auto">
+            <li class="nav-item active">
+                <a class="nav-link" href="/syndication/cdc">CDC Information</a>
+            </li>
+        </ul>
+    </div>
+</nav>
+<main role="main">
+    <div class="jumbotron">
+        <div class="container">
+            <h1 class="display-3">Find A Doctor</h1>
+            <h4 class="display-5">Please Enter A Postal Code and Select Specialty To Find A Doctor Nearby</h4>
+        </div>
+    </div>
+
+    <div class="bootstrap-iso">
+        <div class="container-fluid" >
+            <div class="col-md-5">
+                <form role="form" action="/load/booking" th:action="@{/load/booking}"
+                      th:object="${searchItemForm}"
+                      method="post">
+                    <!-- Postal Code -->
+                    <div class="form-group row col-auto mr-auto" >
+                        <div class="col-xs-6">
+                            <label class="control-label" for="postalCode"><abbr title="required">*</abbr> Postal
+                                Code</label>
+                            <input type="text" class="form-control" id="postalCode" name="postalCode"
+                                   th:field="*{postalCode}" th:width="20"/>
+                            <span th:if="${#fields.hasErrors('postalCode')}" th:errors="*{postalCode}"
+                                  class="help-block">error!</span>
+                        </div>
+                    </div>
+                    <!-- Specialties-->
+                    <div class="form-group row col-auto mr-auto">
+                        <label class="control-label">Select Specialty</label>
+                        <div class="form-group row col-auto mr-auto">
+                            <div class="checkbox" th:each="item : ${specialtiesList}">
+                                <label>
+                                    <input type="checkbox" name="specialties" th:value="${item.value}"
+                                           th:text="${item.key}" th:field="*{specialties}"/>
+                                </label>
+                            </div>
+                        </div>
+                        <span th:if="${#fields.hasErrors('specialties')}" th:errors="*{specialties}" class="help-block">error!</span>
+                    </div>
+                    <div class="form-group row col-auto mr-auto" >
+
+                    <button type="submit" class="btn btn-secondary">SEND</button>
+                    </div>
+                </form>
+            </div>
+        </div>
+    </div>
+</main>
+<div th:replace="_temp :: footer"></div>
+<div th:replace="_temp :: script"></div>
+</body>
+</html>

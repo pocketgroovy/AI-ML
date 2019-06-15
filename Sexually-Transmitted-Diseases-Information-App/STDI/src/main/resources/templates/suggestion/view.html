@@ -1,0 +1,62 @@
+<!DOCTYPE html SYSTEM "http://www.thymeleaf.org/dtd/xhtml1-strict-thymeleaf-spring4-4.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml" xmlns:th="http://www.thymeleaf.org">
+<?xml-stylesheet type="text/css" href="rss-style.css" ?>
+<rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
+
+    <html lang="en">
+    <head th:replace="_temp :: header ('Result Page')">
+<body>
+<!-- https://stackoverflow.com/questions/19733447/bootstrap-navbar-with-left-center-or-right-aligned-items -->
+<nav class="navbar navbar-expand-md navbar-dark fixed-top bg-dark">
+    <div class="navbar-collapse collapse w-100 order-1 order-md-0 dual-collapse2">
+        <ul class="navbar-nav mr-auto">
+            <li class="nav-item active">
+                <a class="nav-link" href="/">Info on STDs</a>
+            </li>
+            <li class="nav-item active">
+                <a class="nav-link" href="/suggestion/ask">Test for STDs</a>
+            </li>
+            <li class="nav-item active">
+                <a class="nav-link" href="/booking/search_item">Book Appointment</a>
+            </li>
+        </ul>
+    </div>
+    <div class="mx-auto order-0">
+        <a class="navbar-brand mx-auto" href="/">STD Information App</a>
+        <button class="navbar-toggler" type="button" data-toggle="collapse" data-target=".dual-collapse2">
+            <span class="navbar-toggler-icon"></span>
+        </button>
+    </div>
+    <div class="navbar-collapse collapse w-100 order-3 dual-collapse2">
+        <ul class="navbar-nav ml-auto">
+            <li class="nav-item active">
+                <a class="nav-link" href="/syndication/cdc">CDC Information</a>
+            </li>
+        </ul>
+    </div>
+</nav>
+<main role="main">
+    <div class="container">
+
+        <div class="row">
+
+            <div class="col-md-7">
+
+                <h1>Recommended tests:</h1>
+                <ul>
+                    <li th:each="index : ${#numbers.sequence( 0, #arrays.length(test)-1)}">
+                        <a th:href="${link[index]}" th:text="${test[index]}">Dummy</a>
+                    </li>
+                </ul>
+            </div>
+        </div>
+        <form>
+            <input type="button"  onclick="location.href='/booking/search_item'" value="Book Appointment" >
+        </form>
+        <div th:replace="_temp :: footer"></div>
+    </div>
+
+    <div th:include="_temp :: script"></div>
+</main>
+</body>
+</html>

@@ -1,0 +1,118 @@
+<!DOCTYPE html SYSTEM "http://www.thymeleaf.org/dtd/xhtml1-strict-thymeleaf-spring4-4.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml" xmlns:th="http://www.thymeleaf.org">
+<?xml-stylesheet type="text/css" href="rss-style.css" ?>
+<rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom"/>
+
+<html lang="en">
+<head th:replace="_temp :: header ('Information Page')">
+<body>
+<!-- https://stackoverflow.com/questions/19733447/bootstrap-navbar-with-left-center-or-right-aligned-items -->
+<nav class="navbar navbar-expand-md navbar-dark fixed-top bg-dark">
+    <div class="navbar-collapse collapse w-100 order-1 order-md-0 dual-collapse2">
+        <ul class="navbar-nav mr-auto">
+            <li class="nav-item active">
+                <a class="nav-link" href="#">Info on STDs</a>
+            </li>
+            <li class="nav-item active">
+                <a class="nav-link" href="/suggestion/ask">Test for STDs</a>
+            </li>
+            <li class="nav-item active">
+                <a class="nav-link" href="/booking/search_item">Book Appointment</a>
+            </li>
+        </ul>
+    </div>
+    <div class="mx-auto order-0">
+        <a class="navbar-brand mx-auto" href="/">STD Information App</a>
+        <button class="navbar-toggler" type="button" data-toggle="collapse" data-target=".dual-collapse2">
+            <span class="navbar-toggler-icon"></span>
+        </button>
+    </div>
+    <div class="navbar-collapse collapse w-100 order-3 dual-collapse2">
+        <ul class="navbar-nav ml-auto">
+            <li class="nav-item active">
+                <a class="nav-link" href="/syndication/cdc">CDC Information</a>
+            </li>
+        </ul>
+    </div>
+</nav>
+
+<main role="main">
+
+    <!-- Main jumbotron for a primary marketing message or call to action -->
+    <div class="jumbotron">
+        <div class="container">
+            <h1 class="display-3">Learn more about STDs. Be Aware!</h1>
+            <p>For accurate information surrounding HIV/AIDS and STDs, a watch this series of videos from the Centers for Disease Control and Prevention (CDC).</p>
+
+            <!--Styling for Youtube Player Auto-resizing*/-->
+            <style>
+                .videoWrapper {
+                    position: relative;
+                    padding-bottom: 56.25%; /* 16:9 */
+                    padding-top: 25px;
+                    height: 0;
+                }
+                .videoWrapper iframe {
+                    position: absolute;
+                    top: 0;
+                    left: 0;
+                    width: 100%;
+                    height: 100%;
+                }
+            </style>
+            <!--End of Styling for Youtube Player Auto-resizing*/-->
+
+            <!--Embed CDC Youtube Playlist*/-->
+            <div class="videoWrapper">
+                <iframe
+                        width="560" height="315"
+                        src="https://www.youtube.com/embed/videoseries?list=PL87B964CE4CF0A98C&modestbranding=1"
+                        frameborder="0"
+                        allow="accelerometer; autoplay; encrypted-media; gyroscope; picture-in-picture" allowfullscreen
+                ></iframe>
+            </div>
+            <!--End of Embed CDC Youtube Playlist*/-->
+
+        </div>
+
+    </div>
+
+    <div class="container">
+        <!-- Example row of columns -->
+        <div class="row">
+            <div class="col">
+                <h2>CDC's Twitter Stream on STD</h2>
+            </div>
+
+            <div class="col">
+                <h2>Research News on STDs</h2>
+            </div>
+
+            <!-- Start of RSS Feeds -->
+
+            <div class="w-100"></div>
+            <div class="col">
+                <a class="twitter-timeline" data-lang="en" data-width="500" data-height="750" href="https://twitter.com/CDCSTD?ref_src=twsrc%5Etfw">Tweets by CDCSTD</a> <script async src="https://platform.twitter.com/widgets.js" charset="utf-8"></script>
+            </div>
+
+            <div class="col">
+                <iframe
+                        width="500" height="750"
+                        src="//rss.bloople.net/?url=https%3A%2F%2Fwww.sciencedaily.com%2Frss%2Fhealth_medicine%2Fstd.xml&showtitle=false&type=html"
+                        frameborder="0"
+                        marginheight="20" marginwidth="35">
+                </iframe>
+            </div>
+            <!-- End of RSS Feeds -->
+        </div>
+
+    </div> <!-- /container -->
+
+
+
+</main>
+
+<div th:replace="_temp :: footer"></div>
+<div th:replace="_temp :: script"></div>
+</body>
+</html>

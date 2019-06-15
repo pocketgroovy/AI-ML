@@ -1,0 +1,69 @@
+<!DOCTYPE html SYSTEM "http://www.thymeleaf.org/dtd/xhtml1-strict-thymeleaf-spring4-4.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml" xmlns:th="http://www.thymeleaf.org">
+<html lang="en">
+<head th:replace="_temp :: header ('Mail loading')">
+<body>
+<!-- https://stackoverflow.com/questions/19733447/bootstrap-navbar-with-left-center-or-right-aligned-items -->
+<nav class="navbar navbar-expand-md navbar-dark fixed-top bg-dark">
+    <div class="navbar-collapse collapse w-100 order-1 order-md-0 dual-collapse2">
+        <ul class="navbar-nav mr-auto">
+            <li class="nav-item active">
+                <a class="nav-link" href="#">Info on STDs</a>
+            </li>
+            <li class="nav-item active">
+                <a class="nav-link" href="#">Test for STDs</a>
+            </li>
+            <li class="nav-item active">
+                <a class="nav-link" href="#">Book Appointment</a>
+            </li>
+        </ul>
+    </div>
+    <div class="mx-auto order-0">
+        <a class="navbar-brand mx-auto" href="#">STD Information App</a>
+        <button class="navbar-toggler" type="button" data-toggle="collapse" data-target=".dual-collapse2">
+            <span class="navbar-toggler-icon"></span>
+        </button>
+    </div>
+    <div class="navbar-collapse collapse w-100 order-3 dual-collapse2">
+        <ul class="navbar-nav ml-auto">
+            <li class="nav-item active">
+                <a class="nav-link" href="#">CDC Information</a>
+            </li>
+        </ul>
+    </div>
+</nav>
+<main role="main">
+    <div class="d-flex justify-content-center">
+        <div class="spinner-border m-5" role="status">
+            <span class="sr-only">Loading...</span>
+        </div>
+    </div>
+    <form style="display:hidden" action="/email/send" th:action="@{/email/send}"
+          th:object="${bookingForm}" method="post" id="bookingForm" name="bookingForm">
+        <input type="hidden" class="form-control" id="firstName" name="firstName"
+               th:field="*{firstName}" th:width="20"/>
+        <input type="hidden" class="form-control" id="lastName" name="lastName"
+               th:field="*{lastName}" th:width="20"/>
+        <input type="hidden" class="form-control" id="appointmentDate" name="appointmentDate"
+               th:field="*{appointmentDate}" th:width="20"/>
+        <input type="hidden" class="form-control" id="senderEmail" name="senderEmail"
+               th:field="*{senderEmail}" th:width="20"/>
+        <input type="hidden" class="form-control" id="recipientEmail" name="recipientEmail"
+               th:field="*{recipientEmail}" th:width="20"/>
+        <input type="hidden" class="form-control" id="practitionerName" name="practitionerName"
+               th:field="*{practitionerName}" th:width="20"/>
+        <input type="hidden" class="form-control" id="commentArea" name="commentArea"
+               th:field="*{commentArea}" th:width="20"/>
+    </form>
+</main>
+
+<script th:inline="javascript">
+    window.onload = function(){
+        document.forms['bookingForm'].submit();
+    }
+</script>
+
+<div th:replace="_temp :: footer"></div></body>
+<div th:replace="_temp :: script"></div>
+
+</html>

@@ -1,0 +1,48 @@
+#!/usr/bin/env groovy
+pipeline {
+    agent any
+    environment{
+        repository = "abc/stdi"
+        dockerImage = ''
+    }
+
+    stages {
+        stage('Build') {
+            steps {
+                dir('STDI'){
+                    echo 'Building....'
+                     script{
+                            sh "ls -la"
+                            dockerImage = docker.build(repository + ":${env.BUILD_NUMBER}", "-f ./Dockerfile .")
+                     }
+                }
+            }
+        }
+
+        stage('Test') {
+            steps {
+                echo 'Testing..'
+            }
+        }
+
+        stage('Deploy') {
+            steps {
+                echo 'Deploying....'
+                script{
+                    docker.withRegistry('https://build.hdap.gatech.edu'){
+                        //push the image
+                        dockerImage.push("${env.BUILD_NUMBER}")
+                    }
+                }
+            }
+        }
+        stage('Notify'){
+            steps{
+                echo 'Notifying rancher....'
+                script{
+                    rancher confirm: true, credentialId: 'rancher-server', endpoint: 'https://rancher.hdap.gatech.edu/v2-beta', environmentId: '1a7', environments: '', image: "build.hdap.gatech.edu/" + repository + ":${env.BUILD_NUMBER}", ports: '8080', service: 'prj051/stdi', timeout: 50
+                }
+            }
+        }
+    }
+}

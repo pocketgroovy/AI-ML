@@ -1,0 +1,36 @@
+<!DOCTYPE html SYSTEM "http://www.thymeleaf.org/dtd/xhtml1-strict-thymeleaf-spring4-4.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <title th:remove="all">Template for HTML email (simple)</title>
+    <meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
+</head>
+<body>
+<p >
+    Hello, <span th:text="${name}"></span>
+</p>
+<p>
+    You have successfully sent an appointment request to <span th:text="${recipientEmail}"></span> on
+    <span th:text="${#dates.format(requestDate)}">01-01-2019</span>
+</p>
+<p>
+    Your Preferred Appointment Date: <span th:text="${appointmentDate}" ></span>
+</p>
+
+<p>
+    Practitioner: <span th:text="${practitionerName}" ></span>
+</p>
+
+<p>
+    Your Message: <span th:utext="${fareaNl2br}" ></span>
+</p>
+
+<p>
+    If you don't hear back from the practitioner's office within 3 business day, please contact them directly
+</p>
+
+<p>
+    Regards, <br />
+    &emsp; <em>CS6440 Spring Team Across The World Champions</em>
+</p>
+</body>
+</html>

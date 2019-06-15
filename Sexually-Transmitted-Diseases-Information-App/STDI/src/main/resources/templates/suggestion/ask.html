@@ -1,0 +1,113 @@
+<!DOCTYPE html SYSTEM "http://www.thymeleaf.org/dtd/xhtml1-strict-thymeleaf-spring4-4.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml" xmlns:th="http://www.thymeleaf.org">
+<?xml-stylesheet type="text/css" href="rss-style.css" ?>
+<rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
+
+    <html lang="en">
+    <head th:replace="_temp :: header ('Suggestion Tool')">
+    <body>
+<!-- https://stackoverflow.com/questions/19733447/bootstrap-navbar-with-left-center-or-right-aligned-items -->
+<nav class="navbar navbar-expand-md navbar-dark fixed-top bg-dark">
+    <div class="navbar-collapse collapse w-100 order-1 order-md-0 dual-collapse2">
+        <ul class="navbar-nav mr-auto">
+            <li class="nav-item active">
+                <a class="nav-link" href="/">Info on STDs</a>
+            </li>
+            <li class="nav-item active">
+                <a class="nav-link" href="#">Test for STDs</a>
+            </li>
+            <li class="nav-item active">
+                <a class="nav-link" href="/booking/search_item">Book Appointment</a>
+            </li>
+        </ul>
+    </div>
+    <div class="mx-auto order-0">
+        <a class="navbar-brand mx-auto" href="/">STD Information App</a>
+        <button class="navbar-toggler" type="button" data-toggle="collapse" data-target=".dual-collapse2">
+            <span class="navbar-toggler-icon"></span>
+        </button>
+    </div>
+    <div class="navbar-collapse collapse w-100 order-3 dual-collapse2">
+        <ul class="navbar-nav ml-auto">
+            <li class="nav-item active">
+                <a class="nav-link" href="/syndication/cdc">CDC Information</a>
+            </li>
+        </ul>
+    </div>
+</nav>
+
+<main role="main">
+        <div class="container">
+            <h2 class="display-5">Please provide information for the best recommendations.</h2>
+        </div>
+
+    <div class="bootstrap-iso">
+        <div class="container-fluid">
+            <div class="row">
+                <div class="col-md-5">
+                    <form role="form" action="/suggestion/view" th:action="@{/suggestion/view}"
+                          th:object="${suggestionForm}"
+                          method="post">
+
+                        <!-- date -->
+                        <div class="form-group ">
+                            <label class="control-label" for="yearOfBirthEx">Year of Birth</label>
+                            <select class="form-control" id="yearOfBirthEx" name="yearOfBirth">
+                                <option value="">---</option>
+                                <option th:each="year : ${#numbers.sequence(1900, #dates.year(#dates.createNow()))}"
+                                        th:value="${year}" th:text="${year}"
+                                        th:selected="${year} == *{yearOfBirth}">pulldown
+                                </option>
+                            </select>
+                            <span th:if="${#fields.hasErrors('yearOfBirth')}" th:errors="*{yearOfBirth}"
+                                  class="help-block">error!</span>
+                        </div>
+                        <div class="checkbox-gender">
+                            <label class="control-label1" for="genderEx">Gender</label>
+                            <!-- Make sure to always set a value for attributes when using thymeleaf (use checked="checked" instead of checked) -->
+                            <div><input type="radio" name="gender" id = "genderEx" value="male" checked="checked" th:field="*{gender}"/>Male</div>
+                            <div><input type="radio" name="gender" value="female" th:field="*{gender}" />Female</div>
+                            <div><input type="radio" name="gender" value="other" th:field="*{gender}" />Other</div>
+                        <span th:if="${#fields.hasErrors('gender')}" th:errors="*{gender}"
+                              class="help-block">error!</span>
+                        </div>
+                        <div class="checkbox-pregnant">
+                            <label class="control-label1" for="pregnantEx">Are you expecting?</label>
+                            <!-- Make sure to always set a value for attributes when using thymeleaf (use checked="checked" instead of checked) -->
+                            <div><input type="radio" name="pregnant" id = "pregnantEx" value="No" checked="checked" th:field="*{pregnant}"/>No</div>
+                            <div><input type="radio" name="pregnant" value="Yes" th:field="*{pregnant}" />Yes</div>
+                            <span th:if="${#fields.hasErrors('pregnant')}" th:errors="*{pregnant}"
+                                  class="help-block">error!</span>
+                        </div>
+                        <div class="checkbox-eswm">
+                            <label class="control-label1" for="eswmEx">Did you ever had sex with men?</label>
+                            <!-- Make sure to always set a value for attributes when using thymeleaf (use checked="checked" instead of checked) -->
+                            <div><input type="radio" name="eswm" id = "eswmEx" value="No" checked="checked" th:field="*{eswm}"/>No</div>
+                            <div><input type="radio" name="eswm" value="Yes" th:field="*{eswm}" />Yes</div>
+                            <span th:if="${#fields.hasErrors('eswm')}" th:errors="*{eswm}"
+                                  class="help-block">error!</span>
+                        </div>
+                        <div class="checkbox-cswm">
+                            <label class="control-label1" for="cswmEx">Are you having Sex with men currently?</label>
+                            <!-- Make sure to always set a value for attributes when using thymeleaf (use checked="checked" instead of checked) -->
+                            <div><input type="radio" name="cswm" id = "cswmEx" value="No" checked="checked" th:field="*{cswm}"/>No</div>
+                            <div><input type="radio" name="cswm" value="Yes" th:field="*{cswm}" />Yes</div>
+                            <span th:if="${#fields.hasErrors('cswm')}" th:errors="*{cswm}"
+                                  class="help-block">error!</span>
+                        </div>
+                        <button type="submit" class="btn btn-secondary">SUGGEST</button>
+                    </form>
+                </div>
+            </div>
+        </div>
+    </div>
+
+</main>
+<div th:replace="_temp :: footer"></div>
+<div th:replace="_temp :: script"></div>
+
+</div>
+
+
+</body>
+</html>

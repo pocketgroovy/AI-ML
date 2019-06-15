@@ -1,0 +1,20 @@
+table {
+    table-layout: auto;
+    border-collapse: collapse;
+    width: 100%;
+}
+
+td {
+    width: 5em;
+    line-height: 2em;
+    background-color: #fff;
+    font-weight: bold;
+}
+tr:hover {
+    color: #fff;
+    background-color: #000;
+}
+
+tr:hover td {
+    background-color: transparent;
+}

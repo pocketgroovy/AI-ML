@@ -1,0 +1,213 @@
+<!DOCTYPE html SYSTEM "http://www.thymeleaf.org/dtd/xhtml1-strict-thymeleaf-spring4-4.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml" xmlns:th="http://www.thymeleaf.org" lang="en">
+<?xml-stylesheet type="text/css" href="rss-style.css" ?>
+<rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom"/>
+
+<head th:replace="_temp :: header ('BookingForm appointment')">
+<body>
+<!-- https://stackoverflow.com/questions/19733447/bootstrap-navbar-with-left-center-or-right-aligned-items -->
+<nav class="navbar navbar-expand-lg navbar-dark fixed-top bg-dark">
+    <div class="navbar-collapse collapse w-100 order-1 order-md-0 dual-collapse2">
+        <ul class="navbar-nav mr-auto">
+            <li class="nav-item active">
+                <a class="nav-link" href="/">Info on STDs</a>
+            </li>
+            <li class="nav-item active">
+                <a class="nav-link" href="/suggestion/ask">Test for STDs</a>
+            </li>
+            <li class="nav-item active">
+                <a class="nav-link" href="/booking/search_item">Book Appointment</a>
+            </li>
+        </ul>
+    </div>
+    <div class="mx-auto order-0">
+        <a class="navbar-brand mx-auto" href="/">STD Information App</a>
+        <button class="navbar-toggler" type="button" data-toggle="collapse" data-target=".dual-collapse2">
+            <span class="navbar-toggler-icon"></span>
+        </button>
+    </div>
+    <div class="navbar-collapse collapse w-100 order-3 dual-collapse2">
+        <ul class="navbar-nav ml-auto">
+            <li class="nav-item active">
+                <a class="nav-link" href="/syndication/cdc">CDC Information</a>
+            </li>
+        </ul>
+    </div>
+</nav>
+<main role="main">
+    <div class="jumbotron">
+        <div class="container">
+            <h1 class="display-4">Booking Form</h1>
+            <h3 class="display-5">Please Enter Your Booking Information Below</h3>
+        </div>
+    </div>
+
+    <div class="bootstrap-iso">
+        <div class="container-fluid">
+            <div class="row">
+                <div class="col-md-5">
+                    <form role="form" action="/booking/confirm" th:action="@{/booking/confirm}"
+                          th:object="${bookingForm}"
+                          method="post">
+                        <!-- text -->
+                        <div class="form-group row">
+                            <div class="col-xs-6">
+                                <label class="control-label" for="inputFName"><abbr title="required">*</abbr> First
+                                    Name</label>
+                                <input type="text" class="form-control" id="inputFName" name="firstName"
+                                       th:field="*{firstName}" th:width="20"/>
+                                <span th:if="${#fields.hasErrors('firstName')}" th:errors="*{firstName}"
+                                      class="help-block">error!</span>
+                            </div>
+                            <div class="col-xs-6">
+                                <label class="control-label" for="inputLName"><abbr title="required">*</abbr> Last
+                                    Name</label>
+                                <input type="text" class="form-control" id="inputLName" name="lastName"
+                                       th:field="*{lastName}" th:width="20"/>
+                                <span th:if="${#fields.hasErrors('lastName')}" th:errors="*{lastName}"
+                                      class="help-block">error!</span>
+                            </div>
+                        </div>
+                        <!-- email -->
+                        <div class="form-group ">
+                            <label class="control-label" for="senderEmail">Your Email</label>
+                            <input type="email" class="form-control" id="senderEmail" name="senderEmail"
+                                   th:field="*{senderEmail}"/>
+                            <span th:if="${#fields.hasErrors('senderEmail')}" th:errors="*{senderEmail}"
+                                  class="help-block">error!</span>
+                        </div>
+
+                        <!-- Selected Practitioner Name-->
+                        <div class="form-group ">
+                            <label class="control-label" for="inputPractitionerName">Practitioner Name:: </label>
+                            <input type="hidden" class="form-control" id="practitionerName" name="practitionerName"
+                                   th:field="*{practitionerName}"/>
+                            <label class="control-label" for="inputPractitionerName">
+                                <span id="inputPractitionerName" name="practitionerName" th:text="${practitionerName}"/>
+                            </label>
+                        </div>
+                        <div class="form-group ">
+                            <label class="control-label" for="recipientEmail">Practitioner Email:: </label>
+                            <input type="hidden" class="form-control" id="recipientEmail" name="recipientEmail"
+                                   th:field="*{recipientEmail}"/>
+                            <label class="control-label" for="inputRecipientEmail">
+                                <span id="inputRecipientEmail" name="recipientEmail" th:text="${recipientEmail}"/>
+                            </label>
+                            <span th:if="${#fields.hasErrors('recipientEmail')}" th:errors="*{recipientEmail}"
+                                  class="help-block">error!</span>
+                        </div>
+                        <!-- date -->
+                        <div class="form-group ">
+                            <label for="datetimepicker1" class="pt-2 pr-2">What time works for you?</label>
+                            <div class='input-group date' id='datetimepicker1'>
+                                <input type='text' class="form-control" id="inputDateTime" name="appointmentDate"
+                                       placeholder="MM/DD/YYYY hh:mm PM(AM)"
+                                       th:field="*{appointmentDate}"/>
+                                <span class="input-group-addon">
+                                      <span class="glyphicon glyphicon-calendar"></span>
+                                      <span th:if="${#fields.hasErrors('appointmentDate')}"
+                                            th:errors="*{appointmentDate}"
+                                            class="help-block">error!</span>
+                                </span>
+                            </div>
+                        </div>
+                        <!-- textarea -->
+                        <div class="form-group ">
+                            <label class="control-label" for="inputTextarea">Message</label>
+                            <textarea rows="3" cols="80" class="form-control" id="inputTextarea" name="commentArea"
+                                      th:field="*{commentArea}"></textarea>
+                            <span th:if="${#fields.hasErrors('commentArea')}" th:errors="*{commentArea}"
+                                  class="help-block">error!</span>
+                        </div>
+
+
+                        <button type="submit" class="btn btn-secondary">CONFIRM</button>
+                    </form>
+                </div>
+            </div>
+        </div>
+    </div>
+</main>
+<div th:replace="_temp :: footer"></div>
+</div>
+
+<!-- need the below for datetime picker to work -->
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/2.1.1/jquery.min.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/moment.js/2.9.0/moment-with-locales.js"></script>
+<script src="http://cdn.rawgit.com/Eonasdan/bootstrap-datetimepicker/a549aa8780dbda16f6cff545aeabc3d71073911e/src/js/bootstrap-datetimepicker.js"></script>
+<link href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.5/css/bootstrap.min.css" rel="stylesheet"/>
+<link href="http://cdn.rawgit.com/Eonasdan/bootstrap-datetimepicker/a549aa8780dbda16f6cff545aeabc3d71073911e/build/css/bootstrap-datetimepicker.css"
+      rel="stylesheet"/>
+<script type="text/javascript">
+    $('#datetimepicker1').datetimepicker();
+</script>
+<!-- for datetimepicker -->
+
+<style>
+
+    html, body, main{
+        margin:0px;
+        padding:0px;
+    }
+
+    .nav-item{
+        font-size: 1.125em;
+    }
+
+    .fixed-top {
+        position: fixed;
+        top: 0;
+        right: 0;
+        left: 0;
+        z-index: 1030;
+    }
+    .bg-dark {
+        background-color: #343a40 !important;
+    }
+    .navbar {
+        min-height: 50px;
+        margin-bottom: 0px;
+        border: 1px solid transparent;
+        position: relative;
+        display: flex;
+        align-items: center;
+        padding: .2rem 1rem;
+    }
+    .navbar-collapse.collapse {
+        display: flex !important;
+        height: auto !important;
+        padding-bottom: 0;
+        overflow: visible !important;
+    }
+    .navbar-brand {
+        float: left;
+        height: 50px;
+        padding: 15px 15px;
+        font-size: 20px;
+        line-height: 20px;
+    }
+    section {
+        display: block;
+    }
+    *, ::after, ::before {
+        box-sizing: border-box;
+    }
+    .jumbotron {
+        margin-bottom: 2rem;
+        background-color: #e9ecef;
+        border-radius: .3rem;
+        padding-top: 50px;
+        padding-bottom: 57px;
+    }
+    body {
+        font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, "Helvetica Neue", Arial, "Noto Sans", sans-serif, "Apple Color Emoji", "Segoe UI Emoji", "Segoe UI Symbol", "Noto Color Emoji";
+        font-weight: 400;
+        line-height: 1.5;
+        color: #212529;
+    }
+    .ml-auto {
+        margin-left: auto !important;
+    }
+</style>
+</body>
+</html>

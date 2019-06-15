@@ -1,0 +1,104 @@
+<!DOCTYPE html SYSTEM "http://www.thymeleaf.org/dtd/xhtml1-strict-thymeleaf-spring4-4.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml" xmlns:th="http://www.thymeleaf.org">
+<html lang="en">
+<head th:replace="_temp :: header ('CDC Information Page')">
+<body>
+<!-- https://stackoverflow.com/questions/19733447/bootstrap-navbar-with-left-center-or-right-aligned-items -->
+<nav class="navbar navbar-expand-md navbar-dark fixed-top bg-dark">
+    <div class="navbar-collapse collapse w-100 order-1 order-md-0 dual-collapse2">
+        <ul class="navbar-nav mr-auto">
+            <li class="nav-item active">
+                <a class="nav-link" href="/">Info on STDs</a>
+            </li>
+            <li class="nav-item active">
+                <a class="nav-link" href="/suggestion/ask">Test for STDs</a>
+            </li>
+            <li class="nav-item active">
+                <a class="nav-link" href="/booking/search_item">Book Appointment</a>
+            </li>
+        </ul>
+    </div>
+    <div class="mx-auto order-0">
+        <a class="navbar-brand mx-auto" href="/">STD Information App</a>
+        <button class="navbar-toggler" type="button" data-toggle="collapse" data-target=".dual-collapse2">
+            <span class="navbar-toggler-icon"></span>
+        </button>
+    </div>
+    <div class="navbar-collapse collapse w-100 order-3 dual-collapse2">
+        <ul class="navbar-nav ml-auto">
+            <li class="nav-item active">
+                <a class="nav-link" href="#">CDC Information</a>
+            </li>
+        </ul>
+    </div>
+</nav>
+
+
+<main role="main">
+
+    <!-- Main jumbotron for a primary marketing message or call to action -->
+    <div class="jumbotron">
+        <div class="container">
+            <h1 class="display-3">Sexually Transmitted Diseases 101</h1>
+            <p>Understanding your sexual health and how to prevent sexually transmitted diseases are important to keep you healthy. Find resources for condom effectiveness, PrEP, pregnancy, testing locations, and guidance on treatment and prevention for all diseases.</p>
+
+        </div>
+    </div>
+
+
+
+    <div class="container-fluid">
+        <nav class="navbar navbar-expand-sm bg-light justify-content-sm-center">
+            <!-- Links -->
+            <ul class="navbar-nav mr-auto justify-content-sm-center container-fluid">
+                <li class="nav-item">
+                    <a class="nav-link" href="/syndication/cdc">STD 101</a>
+                </li>
+                <li class="nav-item">
+                    <a class="nav-link" href="/syndication/bacterialvaginosis">Bacterial Vaginosis</a>
+                </li>
+                <li class="nav-item">
+                    <a class="nav-link" href="/syndication/chlamydia">Chlamydia</a>
+                </li>
+                <li class="nav-item">
+                    <a class="nav-link" href="/syndication/congenitalsyphilis">Congenital Syphilis</a>
+                </li>
+                <li class="nav-item">
+                    <a class="nav-link" href="/syndication/genitalherpes">Genital Herpes</a>
+                </li>
+                <li class="nav-item">
+                    <a class="nav-link" href="/syndication/gonorrhea">Gonorrhea</a>
+                </li>
+                <li class="nav-item">
+                    <a class="nav-link" href="/syndication/hiv">HIV</a>
+                </li>
+                <li class="nav-item">
+                    <a class="nav-link" href="/syndication/pelvic">Pelvic Inflammatory Disease (PID)</a>
+                </li>
+                <li class="nav-item">
+                    <a class="nav-link" href="/syndication/syphilis">Syphilis</a>
+                </li>
+                <li class="nav-item">
+                    <a class="nav-link" href="/syndication/trichomoniasis">Trichomoniasis</a>
+                </li>
+                <li class="nav-item">
+                    <a class="nav-link" href="/syndication/treatment">STD Treatment</a>
+                </li>
+
+            </ul>
+        </nav>
+    </div>
+
+    <div class="container">
+
+        <div id="main">
+            <!-- Markup for HTML (CDC - STD Treatment) --><div class='rid_5700ff30_234531' data-apiroot='//tools.cdc.gov/api' data-mediatype='html' data-mediaid='234531' data-stripscripts='true' data-stripanchors='false' data-stripimages='false' data-stripcomments='true' data-stripstyles='true' data-cssclasses='syndicate' data-ids='' data-xpath='' data-oe='utf-8' data-of='xhtml' data-ns='cdc' data-postprocess='' data-nw='true' data-iframe='true' data-cdc-widget='syndicationIframe' data-apiembedsrc='//tools.cdc.gov/api/embed/html/js/embed-2.0.3.js' data-iframeembedsrc='//tools.cdc.gov/TemplatePackage/contrib/widgets/tp-widget-external-loader.js'></div><script src='//tools.cdc.gov/TemplatePackage/contrib/widgets/tp-widget-external-loader.js' ></script><noscript>You need javascript enabled to view this content or go to <a href='//tools.cdc.gov/api/v2/resources/media/234531/noscript'>source URL</a>.</noscript>
+        </div>
+    </div><!--/row-offcanvas -->
+
+</main>
+
+
+<div th:replace="_temp :: footer"></div>
+</body>
+</html>
